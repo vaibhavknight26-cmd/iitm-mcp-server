@@ -125,7 +125,7 @@ LEDGER_URL = (
     "https://exam.sanand.workers.dev/questionData"
     "?email=24f2000638%40ds.study.iitm.ac.in"
     "&quizSign=ozEhPYU0y%2FiGNIUWoLFL7fiLckiMNlZKjAknkEqP8YVd4rXtq7vV%2BL1PEpyZ84RTz%2FAoZ4Gvbf6ErhhXuBU38UD7uyG2MwlAngBHRhflkqsMPbXk0KmWy4LtXJTrbZ4H0JN5dfte8WBHUKjMZFTZXsAamP5M0I9%2FLxTRdmddQvLZh01rPKobwCuqC2rWLvk2S9JPdNclUOUs1E%2F%2FX0DHvkpEPRZnhFvZVOkiHEkOY250QecJkjkCQSpzf9wqTVQzKfmX%2FNDxdc2VxHxsNKEa9FRr5QueUp50T8vGa%2BTFFbtgS%2BGzKuesHip7IgRD5boVpLBzUfjgzojQC1gRdHGN6Q%3D%3D"
-    "&questionId=q-ledger-agent-server&path=%2F"
+    "&questionId=q-ledger-agent-server&path=%2Fexport"
 )
 
 USD_RATE = {"USD": 1.0, "EUR": 1.08, "INR": 0.01114}
