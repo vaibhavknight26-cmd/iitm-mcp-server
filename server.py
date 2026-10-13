@@ -294,18 +294,11 @@ def solve_ledger_question(question):
         if "product" in q:
             totals = defaultdict(float)
             for r in relevant:
-                if "quantity" in q or "selling" in q:
-                    totals[r.get("product", "")] += float(r.get("qty", 0))
-                else:
-                    totals[r.get("product", "")] += usd_amount(r)
+                totals[r.get("product", "")] += usd_amount(r)
             if totals:
                 name = max(totals, key=totals.get)
-                return f"{name}: {totals[name]:.2f}"
-
-    # Total revenue or refund value, converted to USD.
-    total = sum(usd_amount(r) for r in relevant)
-    label = "Total refunds" if is_refund else "Total revenue"
-    return f"{label}: ${total:.2f} USD"
+                return f"{name}: ${totals[name]:.2f} USD"
+        return f"{label}: ${total:.2f} USD"
 
 
 @app.post("/answer")
