@@ -275,7 +275,7 @@ def solve_ledger_question(question):
     # Count questions.
     if any(word in q for word in ("how many", "number of", "count of", "count the", "count ")):
         if "customer" in q:
-            value = len({r.get("customer") for r in filtered if r.get("customer")})
+            value = len({r.get("customer") for r in relevant if r.get("customer")})
             return str(value)
         if "product" in q and ("different" in q or "unique" in q):
             return str(len({r.get("product") for r in filtered if r.get("product")}))
