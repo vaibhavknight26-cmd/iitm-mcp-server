@@ -273,7 +273,7 @@ def solve_ledger_question(question):
     relevant = [r for r in filtered if r.get("status", "").lower() == status]
 
     # Count questions.
-    if any(word in q for word in ("how many", "number of", "count of")):
+    if any(word in q for word in ("how many", "number of", "count of", "count the", "count ")):
         if "customer" in q:
             value = len({r.get("customer") for r in filtered if r.get("customer")})
             return str(value)
