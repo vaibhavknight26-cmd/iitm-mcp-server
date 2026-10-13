@@ -281,25 +281,74 @@ def solve_ledger_question(question):
             return str(len({r.get("product") for r in filtered if r.get("product")}))
         return str(len(relevant))
 
+   
     # Highest / top product or customer questions.
-    if any(word in q for word in ("highest", "top", "most", "best-selling", "best selling")):
+    if any(word in q for word in (
+        "highest", "top", "most", "best-selling", "best selling"
+    )):
         if "customer" in q:
             totals = defaultdict(float)
             for r in relevant:
-                totals[r.get("customer", "")] += usd_amount(r)
+                customer = r.get("customer", "")
+                if customer:
+                    totals[customer] += usd_amount(r)
             if totals:
                 name = max(totals, key=totals.get)
                 return f"{name}: ${totals[name]:.2f} USD"
+            return "No matching customer revenue found."
 
         if "product" in q:
             totals = defaultdict(float)
             for r in relevant:
-                totals[r.get("product", "")] += usd_amount(r)
+                product = r.get("product", "")
+                if product:
+                    totals[product] += usd_amount(r)
             if totals:
                 name = max(totals, key=totals.get)
                 return f"{name}: ${totals[name]:.2f} USD"
-        return f"{label}: ${total:.2f} USD"
+            return "No matching product revenue found."
 
+   
+    # Highest / top product or customer questions.
+    if any(word in q for word in (
+        "highest", "top", "most", "best-selling", "best selling"
+    )):
+        if "customer" in q:
+            totals = defaultdict(float)
+            for r in relevant:
+                customer = r.get("customer", "")
+                if customer:
+                    totals[customer] += usd_amount(r)
+            if totals:
+                name = max(totals, key=totals.get)
+                return f"{name}: ${totals[name]:.2f} USD"
+            return "No matching customer revenue found."
+
+        if "product" in q:
+            totals = defaultdict(float)
+            for r in relevant:
+                product = r.get("product", "")
+                if product:
+                    totals[product] += usd_amount(r)
+            if totals:
+                name = max(totals, key=totals.get)
+                return f"{name}: ${totals[name]:.2f} USD"
+            return "No matching product revenue found."
+
+    # Total revenue, refunds, and amount questions.
+    is_amount_question = any(
+        word in q for word in (
+            "revenue", "refund", "earned", "earn", "sales",
+            "how much", "total", "in us dollars", "in usd",
+            "us dollars", "usd"
+        )
+    )
+
+    if is_amount_question:
+        total = sum(usd_amount(r) for r in relevant)
+        return f"${total:.2f} USD"
+
+    return "I could not determine the requested calculation."
 
 @app.post("/answer")
 async def ledger_answer(request: Request):
