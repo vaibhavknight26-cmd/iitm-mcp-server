@@ -348,7 +348,7 @@ def solve_ledger_question(question):
     if "average" in q or "avg" in q:
         paid_orders = [r for r in relevant if r.get("status", "").lower() == "paid"]
         return f"${sum(usd_amount(r) for r in paid_orders) / len(paid_orders):.2f} USD" if paid_orders else "$0.00 USD"
-
+       
     if is_amount_question:
         total = sum(usd_amount(r) for r in relevant)
         return f"${total:.2f} USD"
