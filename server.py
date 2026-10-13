@@ -344,6 +344,10 @@ def solve_ledger_question(question):
         )
     )
 
+   
+    if "average" in q or "avg" in q:
+        return f"${sum(usd_amount(r) for r in relevant) / len(relevant):.2f} USD" if relevant else "$0.00 USD"
+
     if is_amount_question:
         total = sum(usd_amount(r) for r in relevant)
         return f"${total:.2f} USD"
