@@ -309,31 +309,7 @@ def solve_ledger_question(question):
             return "No matching product revenue found."
 
    
-    # Highest / top product or customer questions.
-    if any(word in q for word in (
-        "highest", "top", "most", "best-selling", "best selling"
-    )):
-        if "customer" in q:
-            totals = defaultdict(float)
-            for r in relevant:
-                customer = r.get("customer", "")
-                if customer:
-                    totals[customer] += usd_amount(r)
-            if totals:
-                name = max(totals, key=totals.get)
-                return f"{name}: ${totals[name]:.2f} USD"
-            return "No matching customer revenue found."
-
-        if "product" in q:
-            totals = defaultdict(float)
-            for r in relevant:
-                product = r.get("product", "")
-                if product:
-                    totals[product] += usd_amount(r)
-            if totals:
-                name = max(totals, key=totals.get)
-                return f"{name}: ${totals[name]:.2f} USD"
-            return "No matching product revenue found."
+   
 
     # Total revenue, refunds, and amount questions.
     is_amount_question = any(
