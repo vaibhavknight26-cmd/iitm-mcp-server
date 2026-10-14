@@ -305,7 +305,7 @@ def solve_ledger_question(question):
                     totals[product] += usd_amount(r)
             if totals:
                 name = max(totals, key=totals.get)
-                return f"{name}: ${totals[name]:.2f} USD"
+                return name
             return "No matching product revenue found."
 
    
