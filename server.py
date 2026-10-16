@@ -112,11 +112,16 @@ def parse_business_date(value):
     return dt.astimezone(BUSINESS_TZ)
 
 
+
 def amount_usd(row, rates):
     currency = str(row.get("currency", "USD")).upper()
     if currency not in rates:
-        raise ValueError(f"Missing USD conversion rate for currency {currency}")
-    return float(row.get("amount", 0) or 0) * rates[currency]
+        raise ValueError(
+            f"Missing USD conversion rate for currency {currency}"
+        )
+    amount = float(row.get("amount", 0) or 0)
+    return round(amount * rates[currency] + 1e-10, 2)
+
 
 
 def find_month_year(question):
