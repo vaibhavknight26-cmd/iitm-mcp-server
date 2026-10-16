@@ -188,7 +188,7 @@ def load_ledger():
 
 def business_date(value):
     dt = datetime.fromisoformat(value.replace("Z", "+00:00"))
-    return dt.astimezone(ZoneInfo("Asia/Kolkata"))
+    return dt.astimezone(ZoneInfo("UTC"))
 
 
 def usd_amount(row):
